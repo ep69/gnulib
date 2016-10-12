@@ -52,7 +52,12 @@ enum
   GBP_T            = 9,
   GBP_LV           = 10,
   GBP_LVT          = 11,
-  GBP_RI           = 12
+  GBP_RI           = 12,
+  GBP_ZWJ          = 13,
+  GBP_EB           = 14,
+  GBP_EM           = 15,
+  GBP_GAZ          = 16,
+  GBP_EBG          = 17
 };
 
 /* Return the Grapheme_Cluster_Break property of a Unicode character. */

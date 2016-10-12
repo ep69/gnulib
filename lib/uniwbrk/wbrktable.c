@@ -33,24 +33,31 @@
 (ALetter | HL | Numeric | Katakana) × ExtendNumLet                    (WB13a)
                        ExtendNumLet × ExtendNumLet                    (WB13a)
                    ExtendNumLet × (ALetter | HL | Numeric | Katakana) (WB13b)
-                 Regional_Indicator × Regional_Indicator              (WB13c)
+                 Regional_Indicator × Regional_Indicator              (WB15)
+                                ZWJ × (Glue_After_Zwj | EBG)          (WB3c)
+                     (E_Base | EBG) × E_Modifier                      (WB14)
  */
 
-const unsigned char uniwbrk_table[12][12] =
-{        /* current:      OTHER        MIDNUMLET    NUMERIC     DQ         */
-         /*                 KATAKANA     MIDLETTER    EXTENDNUMLET  SQ     */
-         /*                   ALETTER      MIDNUM           RI          HL */
+const unsigned char uniwbrk_table[17][17] =
+{        /* current:      OTHER        MIDNUMLET    NUMERIC     DQ          ZWJ         GAZ     */
+         /*                 KATAKANA     MIDLETTER    EXTENDNUMLET  SQ          EB          EBG */
+         /*                   ALETTER      MIDNUM           RI          HL          EM          */
   /* last */
-  /* WBP_OTHER */        {  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1 },
-  /* WBP_KATAKANA */     {  1,  0,  1,  1,  1,  1,  1,  0,  1,  1,  1,  1 },
-  /* WBP_ALETTER */      {  1,  1,  0,  1,  1,  1,  0,  0,  1,  1,  1,  0 },
-  /* WBP_MIDNUMLET */    {  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1 },
-  /* WBP_MIDLETTER */    {  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1 },
-  /* WBP_MIDNUM */       {  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1 },
-  /* WBP_NUMERIC */      {  1,  1,  0,  1,  1,  1,  0,  0,  1,  1,  1,  0 },
-  /* WBP_EXTENDNUMLET */ {  1,  0,  0,  1,  1,  1,  0,  0,  1,  1,  1,  0 },
-  /* WBP_RI */           {  1,  1,  1,  1,  1,  1,  1,  1,  0,  1,  1,  1 },
-  /* WBP_DQ */           {  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1 },
-  /* WBP_SQ */           {  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1 },
-  /* WBP_HL */           {  1,  1,  0,  1,  1,  1,  0,  0,  1,  1,  0,  0 }
+  /* WBP_OTHER */        {  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  1,  1,  1,  1 },
+  /* WBP_KATAKANA */     {  1,  0,  1,  1,  1,  1,  1,  0,  1,  1,  1,  1,  0,  1,  1,  1,  1 },
+  /* WBP_ALETTER */      {  1,  1,  0,  1,  1,  1,  0,  0,  1,  1,  1,  0,  0,  1,  1,  1,  1 },
+  /* WBP_MIDNUMLET */    {  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  1,  1,  1,  1 },
+  /* WBP_MIDLETTER */    {  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  1,  1,  1,  1 },
+  /* WBP_MIDNUM */       {  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  1,  1,  1,  1 },
+  /* WBP_NUMERIC */      {  1,  1,  0,  1,  1,  1,  0,  0,  1,  1,  1,  0,  0,  1,  1,  1,  1 },
+  /* WBP_EXTENDNUMLET */ {  1,  0,  0,  1,  1,  1,  0,  0,  1,  1,  1,  0,  0,  1,  1,  1,  1 },
+  /* WBP_RI */           {  1,  1,  1,  1,  1,  1,  1,  1,  0,  1,  1,  1,  0,  1,  1,  1,  1 },
+  /* WBP_DQ */           {  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  1,  1,  1,  1 },
+  /* WBP_SQ */           {  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  1,  1,  1,  1 },
+  /* WBP_HL */           {  1,  1,  0,  1,  1,  1,  0,  0,  1,  1,  0,  0,  0,  1,  1,  1,  1 },
+  /* WBP_ZWJ */          {  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  1,  1,  0,  0 },
+  /* WBP_EB */           {  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  1,  0,  1,  1 },
+  /* WBP_EM */           {  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  1,  1,  1,  1 },
+  /* WBP_GAZ */          {  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  1,  1,  1,  1 },
+  /* WBP_EBG */          {  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  0,  1,  0,  1,  1 }
 };

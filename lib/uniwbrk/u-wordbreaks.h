@@ -84,7 +84,7 @@ FUNC (const UNIT *s, size_t n, char *p)
                      (ALetter | HL | Numeric | Katakana) × ExtendNumLet (WB13a)
                                             ExtendNumLet × ExtendNumLet (WB13a)
                     ExtendNumLet × (ALetter | HL | Numeric | Katakana)  (WB13b)
-                               Regional_Indicator × Regional_Indicator  (WB13c)
+                               Regional_Indicator × Regional_Indicator  (WB15)
                    */
                   /* No break across certain punctuation.  Also, disable word
                      breaks that were recognized earlier (due to lookahead of
@@ -108,9 +108,14 @@ FUNC (const UNIT *s, size_t n, char *p)
                       *last_compchar_ptr = 0;
                       /* *p = 0; */
                     }
-                  /* Break after Format and Extend characters.  */
-                  else if (last_compchar_prop == WBP_EXTEND
-                           || last_compchar_prop == WBP_FORMAT)
+                  /* Break after Format and Extend character, unless
+		     it is followed by another Format and Extend
+		     character (WB4).  */
+                  else if ((last_compchar_prop == WBP_EXTEND
+			    || last_compchar_prop == WBP_FORMAT)
+			   && !(last_compchar_prop == WBP_EXTEND
+				|| last_compchar_prop == WBP_FORMAT
+				|| last_compchar_prop == WBP_ZWJ))
                     *p = 1;
                   else
                     {
@@ -136,8 +141,8 @@ FUNC (const UNIT *s, size_t n, char *p)
             }
 
           last_char_prop = prop;
-          /* Ignore Format and Extend characters, except at the start
-             of the line.  */
+          /* Ignore Format and Extend characters, except at the
+             start of the line.  */
           if (last_compchar_prop < 0
               || last_compchar_prop == WBP_CR
               || last_compchar_prop == WBP_LF
